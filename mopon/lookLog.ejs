@@ -1,0 +1,62 @@
+<article class="m-cont" style="width: 1100px; height: 600px; padding:0 20px;">
+    <section class="m-search-wrap" node-name="searchBar">
+        <ul class="search-items" node-name="items">   
+            <li class="item">
+                <span class="m-search-condition">
+                    <span class="label">政策名称</span>
+                    <span class="condition-content"><input name="policyName" node-name="policyNameAuto" data-validate="nullText=政策名称" type="text"/></span>
+                </span>
+            </li>
+            <li class="item">
+                <span class="m-search-condition">
+                    <span class="label">影院名称</span>
+                    <span class="condition-content"><input name="synchroCinameName" node-name="cinemaAuto" data-validate="nullText=影院名称" type="text"/></span>
+                </span>
+            </li>
+            <li class="item">
+                <span class="m-search-condition" node-name="select" data-key="synchStatus">
+                    <span class="label">状态</span>
+                    <span class="m-select condition-content">
+                        <i class="icon down" node-name="arrowIcon"></i>
+                        <span class="selected-item border-box" node-name="selectedItem">--请选择--</span>
+                        <select class="hide" data-validate="nullText=状态" name="synchStatus" node-name="realSelect">
+                            <option value=""></option>
+                        </select>
+                    </span>
+            </span>
+            </li>
+            <li class="item">
+                <span class="m-search-condition">
+                    <span class="label">操作人</span>
+                    <span class="condition-content"><input name="userName" data-validate="maxlength=100&nullText=操作人" type="text"/></span>
+                </span>
+            </li>
+            <li class="item">
+            <span class="m-search-condition mlt10 flt m-calendar-group">
+                <span class="label">同步时间</span>
+                <span class="condition-container">
+                    <span class="condition-content">
+                        <input readonly="readonly" node-name="calendar" type="text" name="searchStartTime" data-validate="select=true&amp;nullText=起始日期" title="请选择起始日期" placeholder="请选择起始日期">
+                        <i class="icon-date"></i>
+                    </span>
+                </span>
+                <span>到</span>
+                <span class="condition-container">
+                    <span class="condition-content">
+                        <input readonly="readonly" node-name="calendar" type="text" name="searchEndTime" data-validate="select=true&amp;nullText=结束日期" title="请选择结束日期" placeholder="请选择结束日期">
+                        <i class="icon-date"></i>
+                    </span>
+                </span>
+            </span>
+            </li>
+        </ul>
+        <div class="search-but" node-name="searchBut">
+            <span class="m-more-condition-btn hide" node-name="moreBtn">
+                <span>更多</span><span class="more" node-name="more" data-type="hide"><span class="icon-more"></span></span>
+            </span>
+            <span class="m-search-btn" node-name="search">搜索</span>
+        </div>
+    </section>
+    
+    <section class="m-grid" node-name="grid"></section>
+</article>
