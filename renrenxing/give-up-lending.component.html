@@ -1,0 +1,89 @@
+<div class="jdbui-content give-up-lending">
+    <p class="title">查询信息</p>
+    <div class="search-options">
+        <select name="isInside" id="" class='jdbui-select'  [(ngModel)]='searchObjs.use'>
+            <option *ngFor=' let ever of nameChoose' [value]='ever.value'>{{ever.text}}</option>
+        </select>
+        <input type="text" [(ngModel)]="selectValue.hasChoice" maxlength="10">
+        <span>申请日期</span>
+        <input type="date" [(ngModel)]="searchObj.applyStartTime">
+        <span>至</span>
+        <input type="date" [(ngModel)]="searchObj.applyEndTime">
+        <span>拒绝日期</span>
+        <input type="date" [(ngModel)]="searchObj.refuseStartTime">
+        <span>至</span>
+        <input type="date" [(ngModel)]="searchObj.refuseEndTime">
+    </div>
+    <div class="btn-groups">
+        <div class="left">
+            <button class='default jdbui-button' (click)='search()' >
+                <span>查询</span>
+            </button>
+            <div class="jdbui-button gray" (click)='reset()'>重置</div>
+        </div>
+    </div>
+    <table class="jdbui-table">
+        <thead>
+            <th>申请时间</th>
+            <th>申请人</th>
+            <th>放款人</th>
+            <th>借款人</th>
+            <th>借款人手机号</th>
+            <th>身份证</th>
+            <th>金额</th>
+            <th>利率</th>
+            <th>期限（天）</th>
+            <th>费用说明</th>
+            <th>状态</th>
+            <th>操作员</th>
+            <th>拒绝时间</th>
+            <th>拒绝原因</th>
+            <th>备注</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td>{{item.applyDatetime}}</td>
+                <td>{{item.applyName}}</td>
+                <td>{{item.loanerName}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.mobile}}</td>
+                <td><div style="width:66px; white-space: normal;word-wrap: break-word; word-break: break-all;">{{item.identityId}}</div></td>
+                <td>{{item.amount}}</td>
+                <td>{{item.rate}}</td>
+                <td>{{item.duration}}</td>
+                <td>{{item.loanRemark}}</td>
+                <td>{{item.statusName}}</td>
+                <td>
+                    <div>
+                        <ng-container *ngIf="item.operator.firstAuditorName">
+                            <span>{{"初审: "+item.operator.firstAuditorName}}</span><br> 
+                        </ng-container>
+                        <ng-container *ngIf="item.operator.reviewAuditorName">
+                            <span>{{"复审: "+item.operator.reviewAuditorName}}</span><br>  
+                        </ng-container>
+                        <ng-container *ngIf="item.operator.finalAuditorName">
+                            <span>{{"终审: "+item.operator.finalAuditorName}}</span><br> 
+                        </ng-container>
+                        <ng-container *ngIf="item.operator.processorName">
+                            <span>{{"处理人: "+item.operator.processorName}}</span><br>
+                        </ng-container>
+                        <ng-container *ngIf="item.operator.loanerName">
+                            <span>{{"放款人: "+item.operator.loanerName}}</span><br>
+                        </ng-container>
+                    </div>
+                </td>
+                <td>{{item.refuseDatetime}}</td>
+                <td title="{{item.refuseReason}}"><div style="width:150px;
+                    overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.refuseReason}}</div></td>
+                <td class='textarea-td' title="{{ item.remark }}" style="border-right: none;">
+                    <textarea class="noActive" [class.special] = 'isActive && i == selectedIndex' 
+                    maxlength='200' [(ngModel)]='item.remark' placeHolder="最多输入200字" (blur)='blur(item)' (click)='setEditStatus(item, $event, i)'></textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class='table-no-data' *ngIf="list && list.length == 0">暂无数据</div>
+    <div class="page-container" *ngIf="pages && pages.items">
+        <jdb-page-nav (onPageChange)="onPageChange($event)" [paginator]="pages"></jdb-page-nav>
+    </div>
+</div>
